@@ -74,16 +74,28 @@ Wire		- a communication channel for connecting inputs and output termninal on a 
 Bus	   	- a bundle of 'Wires', 32 by default to be used as integer expression variables
                   utilizing the overloaded integer operations to build the computation networks
 
+--
+
 UnOp		- 1 terminal operation
+
 BinOp 		- 2 terminal operation
+
 Op 		- n terminal operation
 
+--
+
 Id : UnOp	- input passes through to output
+
 Not : UnOp 	- output = !input
+
 And : BinOp	- output = input1 & input2
+
 Or: BinOp	- output = input1 | input2
+
 Xor: BinOp	- output = input1 ^ input2
+
 HalfAdder: Op	- half adder with a, b, outputs sum and carry
+
 FullAdder: Op   - full adder with a, b, carry, outputs sum and carry
 
 --
