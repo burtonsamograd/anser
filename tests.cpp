@@ -29,6 +29,15 @@ djb2_anser(unsigned char *str)
 }
 
 int main(int argc, char** argv) {
+  
+  Bus a, b, c;
+  
+  c = a + b;
+  
+  c.set(3);
+  a.set(1);
+  
+  assert(b.get() == 2);
 
   unsigned char* string = (unsigned char*)"This is a test.";
   unsigned int hash = djb2_orig(string);

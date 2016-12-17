@@ -60,6 +60,15 @@ public:
       process_all_but(who);
     }
   }
+
+  Op* nth(int n) {
+    assert(n < m_value);
+    return m_ops[n];
+  }
+
+  size_t size() {
+    return m_value;
+  }
 };
 
 static Wire zero(0);
