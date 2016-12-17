@@ -19,6 +19,22 @@ interesting information within the function that is being analyzed.
 This libary could also be used to do digital logic design at the
 And/Or/Not gate level.
 
+Motivation
+----------
+
+By building compuation graphs, one can see the actual logical inner
+workings of compuational functions.  This in itself is fascinating.
+
+The main intent of this tool was to create a system to help with the
+cracking of hash functions, or at least to learn more about hash
+functions along the way.  By analyzing the inner workings and lattice
+logic structures of existing hash functions and their informational
+flow analysis as bits are entered, we could find flaws or
+optimizations and help build future generations of systems.
+
+I want to make a suite of logic design tools that will allow me to
+generate the plans for a CPU or some other piece of logic hardware.
+
 Example
 -------
 
