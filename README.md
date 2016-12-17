@@ -98,6 +98,17 @@ HalfAdder: Op	- half adder with a, b, outputs sum and carry
 
 FullAdder: Op   - full adder with a, b, carry, outputs sum and carry
 
+References
+----------
+
+The Art of the Propagator (TAOTP) by Alexy Radul and Gerald Jay Sussman: http://web.mit.edu/~axch/www/art.pdf
+
+Structure and Interpretation of Computer Programs (SICP):
+
+- A Simulator for Digital Circuits: https://mitpress.mit.edu/sicp/full-text/book/book-Z-H-22.html#%_sec_3.3.4
+
+- Propagation of Constraints: https://mitpress.mit.edu/sicp/full-text/book/book-Z-H-22.html#%_sec_3.3.5
+
 --
 Burton Samograd
 burton.samograd@gmail.com
