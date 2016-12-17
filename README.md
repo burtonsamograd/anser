@@ -22,6 +22,7 @@ And/Or/Not gate level.
 Example
 -------
 
+```c
 #include "anser.h"
 
 int main(int argc, char** argv) {
@@ -39,6 +40,7 @@ int main(int argc, char** argv) {
     // Make sure we're correct.
     assert(b.get() == 2);
 }
+```
 
 Examples
 --------
