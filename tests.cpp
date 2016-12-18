@@ -28,6 +28,21 @@ djb2_anser(unsigned char *str)
   return hash;
 }
 
+Bus*
+djb2_anser2(Bus input[16])
+{
+  int c;
+  Bus* hashn = new Bus, *hash;
+  hashn->set(5381);
+  hash = hashn;
+  for(int i = 0; i < 16; i++) {
+    *hashn = ((*hash << 5) + *hash) + input[i]; /* hash * 33 + c */
+    hash = hashn;
+  }
+  
+  return hashn;
+}
+
 int main(int argc, char** argv) {
   
   Bus a, b, c;
@@ -90,5 +105,23 @@ int main(int argc, char** argv) {
     std::cerr << a.toString() << std::endl << b.toString() << std::endl << exp.toString() << std::endl << x << " " << y << " " << z << std::endl;
     std::cerr << (x^y) << " " << ((x ^ y) == z) << std::endl;
     assert(z == (x ^ y));
+  }
+
+  {
+    unsigned char* string = (unsigned char*)"0123456789012345";
+
+    Bus input[16];
+
+    Bus* output = djb2_anser2(input);
+
+    unsigned int hash = djb2_orig(string);
+
+    for(int i = 0; i < 16; i++) {
+      input[i].set(string[i]);
+    }
+
+    std::cerr << "------\n";
+    std::cerr << std::hex << hash << std::endl;
+    std::cerr << std::hex << output->get() << std::endl;
   }
 }

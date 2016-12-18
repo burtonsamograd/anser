@@ -168,10 +168,13 @@ logic machines, such as computers.
 Hash Function Analysis
 ----------------------
 
+One can analyze the internals of functions using anser.  Let's start
+with computing a standard hash function using a compuation graph:
+
 ```c
 #include "anser.h"
 
-// Original DJB Hash function
+// THe original DJB2 hash function
 unsigned long
 djb2_orig(unsigned char *str)
 {
@@ -184,40 +187,51 @@ djb2_orig(unsigned char *str)
   return hash;
 }
 
-// Anser compuation graph hash function
+// Build a hash function that computes DJB2 using a computation graph
 Bus*
-djb2_anser(unsigned char *str)
+djb2_anser(Bus input[16])
 {
-  Bus* hash = new Bus();
-
-  hash->set(5381);
-
-  int c;
-  while ((c = (*str++))) {
-    *hash = ((*hash << 5) + *hash) + c; /* hash * 33 + c */
+  Bus* hashn = new Bus, *hash;
+  hashn->set(5381);
+  hash = hashn;
+  for(int i = 0; i < 16; i++) {
+    *hashn = ((*hash << 5) + *hash) + input[i]; /* hash * 33 + c */
+    hash = hashn;
   }
   
-  return hash;
+  return hashn;
 }
 
 int main() {
-    // Test data
-    unsigned char* string = (unsigned char*)"This is a test.";
+    unsigned char* string = (unsigned char*)"0123456789012345";
 
-    // Compute original hash
-    unsigned int hash = djb2_orig(string);
+    Bus input[16];			// define an input bus
+    Bus* output = djb2_anser2(input);	// build the computation graph
 
-    // Compute anser hash with the computation graph
-    Bus* hash2 = djb2_anser(string);
+    // At this point we have the computation graph and can perform any
+    // type of analysis on it through it's input and output terminals.
+    // This is work in progress.
 
-    //  Print the hash values
+
+    // For now we can compute the hash function through the computation graph
+    // by individually setting the inputs that we gave earlier.
+    for(int i = 0; i < 16; i++) {
+      input[i].set(string[i]);
+    }
+
+    // Now we can read the output terminal to read the hash value.
+
+    unsigned int hash = djb2_orig(string); // compute hash using the original function
+
+    std::cerr << "------\n";
     std::cerr << std::hex << hash << std::endl;
-    std::cerr << std::hex << hash2->get() << std::endl;
-
-    // Asssert the values are identical
-    assert(hash == hash2->get());
+    std::cerr << std::hex << output->get() << std::endl;
 }
 ```
+
+An analysis of why one can't set the output terminal and get a result
+through the propagator network running in reverse is left as an
+exercise to the reader.
 
 References
 ----------
