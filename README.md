@@ -114,6 +114,57 @@ HalfAdder: Op	- half adder with a, b, outputs sum and carry
 
 FullAdder: Op   - full adder with a, b, carry, outputs sum and carry
 
+The Use of The Bus
+------------------
+
+Busses are abstractions over top of the above lower level logic
+machinery used to create computation graphs from ordinary mathematical
+expressions.  A bus can be thought of as a variable in your integer
+equation, but it is bi-directional...generally.  Here's an example:
+
+    Bus a, b, c;	// define busses
+
+    c = a + b;		// build graph
+
+    a = 1, c = 4;	// submit partial information
+
+    assert(b == 3);	// check result is correct
+
+As you can see from the above example, we defined the equation one way
+like one would normally compute it in a programming language, but
+could solve for values on the right hand side of the equals, unlike a
+normal programming expression.
+
+This works with arbitrary integer expressions and data.  The
+penultimate example so far is SHA256, included in the examples.  There
+is also an unpublished experiement with performing the bitcoin double
+SHA256 hash function and mining operation and computing it correctly.
+
+Graph Analysis
+--------------
+
+The intention of this project is to create a tool for building and
+debugging logic networks with the hopes of architecting a computation
+system.  As this tool is meant to create computation graphs, as
+complete set of graph analysis tools and utilities are going to be
+needed.
+
+But.
+
+They might not be found here. This project is a derivative of a 'lisp'
+project I have been interested in over the years (see references
+below).  The design tools for the computer architecture I am planning
+are going to be written in Common Lisp; this project is going to be
+the 'execution engine' for the simuation.  Really, this project is an
+implementation of the Scheme projects found SICP chapter 3.
+
+It runs faster since it is written in C++.
+
+The real design intention of this project is to be the core runtime of
+a graph analysis and generation toolkit written in Common Lisp, with
+the goal of such a toolkit to be the creation and analysis of digital
+logic machines, such as computers.
+
 References
 ----------
 
