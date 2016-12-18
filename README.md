@@ -165,6 +165,60 @@ a graph analysis and generation toolkit written in Common Lisp, with
 the goal of such a toolkit to be the creation and analysis of digital
 logic machines, such as computers.
 
+Hash Function Analysis
+----------------------
+
+```c
+#include "anser.h"
+
+// Original DJB Hash function
+unsigned long
+djb2_orig(unsigned char *str)
+{
+  unsigned long hash = 5381;
+  int c;
+  
+  while ((c = *str++))
+    hash = ((hash << 5) + hash) + c; /* hash * 33 + c */
+  
+  return hash;
+}
+
+// Anser compuation graph hash function
+Bus*
+djb2_anser(unsigned char *str)
+{
+  Bus* hash = new Bus();
+
+  hash->set(5381);
+
+  int c;
+  while ((c = (*str++))) {
+    *hash = ((*hash << 5) + *hash) + c; /* hash * 33 + c */
+  }
+  
+  return hash;
+}
+
+int main() {
+    // Test data
+    unsigned char* string = (unsigned char*)"This is a test.";
+
+    // Compute original hash
+    unsigned int hash = djb2_orig(string);
+
+    // Compute anser hash with the computation graph
+    Bus* hash2 = djb2_anser(string);
+
+    //  Print the hash values
+    std::cerr << std::hex << hash << std::endl;
+    std::cerr << std::hex << hash2->get() << std::endl;
+
+    // Asssert the values are identical
+    assert(hash == hash2->get());
+}
+```
+
 References
 ----------
 
