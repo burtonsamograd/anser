@@ -17,10 +17,10 @@ public:
   constexpr Op() { }
   virtual void process() { };
 
-  virtual int inputs();
-  virtual int outputs();
-  virtual Wire* input(int n);
-  virtual Wire* output(int n);
+  virtual int inputs() = 0;
+  virtual int outputs() = 0;
+  virtual Wire* input(int n) = 0;
+  virtual Wire* output(int n) = 0;
 };
 
 
