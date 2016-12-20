@@ -3,14 +3,14 @@ anser - a boolean propagator network framework
 
 Boolean Propagator Networks allow for the bi-directional computation
 of mathematiacal functions.  This means that you can define an
-equation one way, and compute any of it's variables from it's other
-variables, like a Farenheit to Celcius convertor:
+equation and compute any of it's variables using its other variables
+as input.  An example is a Farenheit to Celcius convertor encoding the
+equation 'farenheight = celcius * 9/5 + 32':
 
 ```c
 Bus farenheight, celcius;
     
 Bus constant, a, b;
-    
 b = a * constant;
 a.set(5);
 b.set(9);
@@ -18,15 +18,20 @@ b.set(9);
 farenheight = celcius * constant + 32;
 ```
 
-Once we've setup the computation network equation, you can do the
-following:
+This example has 2 'variables' or terminals to the compuatation
+network: farenhight and celcius.  There is also an internal variable
+to compute the constant 9/5.
+
+Once we've setup the computation network equation, you can evaulate
+the equation by doing the following:
 
 ```c
 celcius.set(0);
 assert(farenheight.get() == 32);
 ```
 
-But, unlike a normal eqation, we can also do it in reverse:
+But, unlike a normal programming statement, we can also compute it in
+reverse:
 
 ```c
 farenheight.set(32);
