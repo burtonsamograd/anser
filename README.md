@@ -63,7 +63,7 @@ Examples
 
 The following contain more complex examples of the system:
 
-tests.cpp	: basic tests for computational networks.
+tests.cpp	: basic tests for computational networks, including the djb2 hash function
 
 sha256.cpp	: a (mostly) unmodified sha256 implemementation and test;
  		  changes were made to variable types to allow for the use of anser.
@@ -122,6 +122,7 @@ machinery used to create computation graphs from ordinary mathematical
 expressions.  A bus can be thought of as a variable in your integer
 equation, but it is bi-directional...generally.  Here's an example:
 
+```c
     Bus a, b, c;	// define busses
 
     c = a + b;		// build graph
@@ -129,16 +130,29 @@ equation, but it is bi-directional...generally.  Here's an example:
     a = 1, c = 4;	// submit partial information
 
     assert(b == 3);	// check result is correct
+```
 
 As you can see from the above example, we defined the equation one way
 like one would normally compute it in a programming language, but
 could solve for values on the right hand side of the equals, unlike a
 normal programming expression.
 
-This works with arbitrary integer expressions and data.  The
-penultimate example so far is SHA256, included in the examples.  There
-is also an unpublished experiement with performing the bitcoin double
-SHA256 hash function and mining operation and computing it correctly.
+Busses define the following operations:
+
+    + - add, add
+    * - mul, multiply
+    & - and, logical and
+    | - or, logical or
+    ^ - xor, logical xor
+    >> - shr, shift right
+    << - shl, shift left
+    >>= - ror, rotate right
+
+This works with arbitrary fixed size integer expressions and data.
+The penultimate example so far is SHA256, included in the examples.
+There is also an unpublished experiement with performing the bitcoin
+double SHA256 hash function and mining operation and computing it
+correctly.
 
 Graph Analysis
 --------------
