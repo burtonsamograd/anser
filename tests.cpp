@@ -180,4 +180,35 @@ int main(int argc, char** argv) {
     assert(f.get() == 80);
   }
 
+  {
+    // Farenheight to Celcius
+    Bus farenheight, celcius;
+    
+    Bus constant, a, b;
+    
+    b = a * constant;
+    a.set(5);
+    b.set(9);
+    
+    farenheight = celcius * constant + 32;
+
+    celcius.set(0);
+    assert(farenheight.get() == 32);
+  }
+
+  {
+    // Celcius to Farenheight
+    Bus farenheight, celcius;
+    
+    Bus constant, a, b;
+    
+    b = a * constant;
+    a.set(5);
+    b.set(9);
+    
+    farenheight = celcius * constant + 32;
+
+    farenheight.set(32);
+    assert(celcius.get() == 0);
+  }
 }

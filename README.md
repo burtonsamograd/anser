@@ -1,6 +1,44 @@
 anser - a boolean propagator network framework
 ----------------------------------------------
 
+Boolean Propagator Networks allow for the bi-directional computation
+of mathematiacal functions.  This means that you can define an
+equation one way, and compute any of it's variables from it's other
+variables, like a Farenheit to Celcius convertor:
+
+```c
+Bus farenheight, celcius;
+    
+Bus constant, a, b;
+    
+b = a * constant;
+a.set(5);
+b.set(9);
+    
+farenheight = celcius * constant + 32;
+```
+
+Once we've setup the computation network equation, you can do the
+following:
+
+```c
+celcius.set(0);
+assert(farenheight.get() == 32);
+```
+
+But, unlike a normal eqation, we can also do it in reverse:
+
+```c
+farenheight.set(32);
+assert(celcius.get() == 0);
+``
+
+This can be done in arbitrary ways, but there are limitations.  This
+paper is written to explore and analyze these limitation of binary
+propagator networks.
+
+--
+
 'Anser' is a small framework for the creation of boolean logic
 computation networks from C++ expressions.  Such networks are
 collections of 'wires' (terminals) that connect 'ops' (gates) to
