@@ -149,16 +149,6 @@ int main(int argc, char** argv) {
   }
 
   {
-    // Square root
-    Bus x, y;
-
-    y = x * x;
-
-    y.set(4);
-    //assert(x.get() == 2); // doesn't work, needs analysis
-  }
-
-  {
     // Subtraction
     Bus a, b, c;
 
@@ -210,5 +200,24 @@ int main(int argc, char** argv) {
 
     farenheight.set(32);
     assert(celcius.get() == 0);
+  }
+
+  {
+    // Square root
+    Bus x, y;
+
+    y = x * x;
+
+    y.set(4);
+
+    // TODO: Perform analysis
+    for(var i = 0; i < y.size(); i++) {
+      Wire *wire = y.nth(i);
+
+      for(int j = 0; j < wire->size(); j++) {
+	Op* op = wire->nth();
+      }
+    }
+    //assert(x.get() == 2); // doesn't work, needs analysis
   }
 }
