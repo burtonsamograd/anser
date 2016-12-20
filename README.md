@@ -31,7 +31,7 @@ But, unlike a normal eqation, we can also do it in reverse:
 ```c
 farenheight.set(32);
 assert(celcius.get() == 0);
-``
+```
 
 This can be done in arbitrary ways, but there are limitations.  This
 paper is written to explore and analyze these limitation of binary
