@@ -233,6 +233,37 @@ An analysis of why one can't set the output terminal and get a result
 through the propagator network running in reverse is left as an
 exercise to the reader.
 
+Division using Propagators
+--------------------------
+
+Only multiply is implemented for Busses, but you can perform a
+division operation using the magic of propagators.  To perform a
+multiplication, you work like so:
+
+```c
+Bus a, b, c;
+
+c = a * b;
+
+a.set(2); // a is an input
+b.set(4); // b is an input
+
+assert(c.get() == 8); // c is an output
+```
+
+To peform division, change your input/output terminals around:
+
+```c
+Bus a, b, c;
+
+c = a * b;
+
+a.set(2);  // a is an input
+c.set(8)   // c is an input
+
+assert(b.get() == 4); // b is now an output
+```
+
 References
 ----------
 
