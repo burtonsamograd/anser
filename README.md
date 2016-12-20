@@ -19,7 +19,7 @@ farenheight = celcius * constant + 32;
 ```
 
 This example has 2 'variables' or terminals to the compuatation
-network: farenhight and celcius.  There is also an internal variable
+network: farenheight and celcius.  There is also an internal variable
 to compute the constant 9/5.
 
 Once we've setup the computation network equation, you can evaulate
@@ -128,8 +128,14 @@ UnOps have get_in() and get_out() to retrieve thier terminal Wires.
 BinOps have get_in1(), get_in2() and get_out() to retrieve thier
 terminal Wires.
 
-Ops have more than 1 or 2 input/output terminals and follow the above
-convention.
+Ops follow the following convention to retrieve their terminals:
+
+```c
+virtual int inputs()		=> return the number of inputs
+virtual Wire *input(int n)	=> get input number n
+virtual int outputs()		=> return the number of outputs
+virtual Wire *output(int n)	=> get input output n
+```
 
 Classes
 -------
