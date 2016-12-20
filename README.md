@@ -278,6 +278,30 @@ c.set(8)   // c is an input
 assert(b.get() == 4); // b is now an output
 ```
 
+Square Root Using Propagators
+-----------------------------
+
+The curious might try the above technique with something more complex,
+like a square root function, which would be the reverse of a
+single variable multiplication:
+
+    // Square root
+    Bus x, y;
+
+    y = x * x;
+
+    y.set(4);
+    assert(x.get() == 2);
+
+Running this gives:
+
+    >>> libc++abi.dylib: terminating with uncaught exception of type WireNotSetException*
+
+Unfortunately, this does not seem work, and it is unknown why to the
+author.
+
+TODO: Further analysis is required.
+
 References
 ----------
 

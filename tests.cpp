@@ -145,4 +145,14 @@ int main(int argc, char** argv) {
     assert(f.get() == 2);
   }
 
+  {
+    // Square root
+    Bus x, y;
+
+    y = x * x;
+
+    y.set(4);
+    //assert(x.get() == 2); // doesn't work, needs analysis
+  }
+
 }
