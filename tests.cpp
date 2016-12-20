@@ -158,4 +158,26 @@ int main(int argc, char** argv) {
     //assert(x.get() == 2); // doesn't work, needs analysis
   }
 
+  {
+    // Subtraction
+    Bus a, b, c;
+
+    c = a + b;
+
+    a.set(100);
+    c.set(80);
+
+    assert(b.get() == -20);
+
+    // Subtraction
+    Bus d, e, f;
+
+    f = d + e;
+
+    d.set(100);
+    e.set(-20);
+
+    assert(f.get() == 80);
+  }
+
 }
