@@ -346,6 +346,11 @@ author.
 
 TODO: Further analysis is required.
 
+An analysis of the Square Root network
+--------------------------------------
+
+TODO: learn to traverse graph network.
+
 References
 ----------
 
