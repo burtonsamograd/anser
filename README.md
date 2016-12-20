@@ -2,7 +2,7 @@ anser - a boolean propagator network framework
 ----------------------------------------------
 
 Boolean Propagator Networks allow for the bi-directional computation
-of mathematiacal functions.  This means that you can define an
+of mathematical functions.  This means that you can define an
 equation one way, and compute any of it's variables from it's other
 variables, like a Farenheit to Celcius convertor:
 
