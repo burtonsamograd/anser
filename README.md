@@ -92,27 +92,27 @@ Bus	   	- a bundle of 'Wires', 32 by default to be used as integer expression va
 
 --
 
-UnOp		- 1 terminal operation
+UnOp		- Unary Operation, 1 terminal operation
 
-BinOp 		- 2 terminal operation
+BinOp 		- Binary Operation, 2 terminal operation
 
-Op 		- n terminal operation
+Op 		- Operation, n terminal operation
 
 --
 
-Id : UnOp	- input passes through to output
+Id : UnOp	- Identity, input passes through to output
 
-Not : UnOp 	- output = !input
+Not : UnOp 	- Logical Not, output = !input
 
-And : BinOp	- output = input1 & input2
+And : BinOp	- Logical And, output = input1 & input2
 
-Or: BinOp	- output = input1 | input2
+Or: BinOp	- Logical Or, output = input1 | input2
 
-Xor: BinOp	- output = input1 ^ input2
+Xor: BinOp	- Logical Xor, output = input1 ^ input2
 
-HalfAdder: Op	- half adder with a, b, outputs sum and carry
+HalfAdder: Op	- Binary Half Adder, half adder with a, b, outputs sum and carry
 
-FullAdder: Op   - full adder with a, b, carry, outputs sum and carry
+FullAdder: Op   - Binary Full Adder, full adder with a, b, carry, outputs sum and carry
 
 The Use of The Bus
 ------------------
@@ -236,7 +236,9 @@ exercise to the reader.
 References
 ----------
 
-The Art of the Propagator (TAOTP) by Alexy Radul and Gerald Jay Sussman: http://web.mit.edu/~axch/www/art.pdf
+The Art of the Propagator (TAOTP) by Alexy Radul and Gerald Jay Sussman:
+
+http://web.mit.edu/~axch/www/art.pdf
 
 Structure and Interpretation of Computer Programs (SICP):
 
