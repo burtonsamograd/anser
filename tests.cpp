@@ -211,11 +211,11 @@ int main(int argc, char** argv) {
     y.set(4);
 
     // TODO: Perform analysis
-    for(var i = 0; i < y.size(); i++) {
+    for(int i = 0; i < y.size(); i++) {
       Wire *wire = y.nth(i);
 
       for(int j = 0; j < wire->size(); j++) {
-	Op* op = wire->nth();
+	Op* op = wire->nth(j);
       }
     }
     //assert(x.get() == 2); // doesn't work, needs analysis
