@@ -412,6 +412,7 @@ public:
     case 1: return m_in2;
     case 2: return m_cin;
     }
+    return nullptr;
   }
   Wire* output(int n) { assert(n == 0 || n == 1);
     if(n == 0) { return m_sum; } else return m_carry; };

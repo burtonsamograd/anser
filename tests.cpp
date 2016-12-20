@@ -1,5 +1,5 @@
 #include "anser.h"
-
+#include "sha256.cpp"
 
 unsigned long
 djb2_orig(unsigned char *str)
@@ -31,7 +31,6 @@ djb2_anser(unsigned char *str)
 Bus*
 djb2_anser2(Bus input[16])
 {
-  int c;
   Bus* hashn = new Bus, *hash;
   hashn->set(5381);
   hash = hashn;
@@ -216,8 +215,33 @@ int main(int argc, char** argv) {
 
       for(int j = 0; j < wire->size(); j++) {
 	Op* op = wire->nth(j);
+
+	std::cout << op->inputs() << " " << op->outputs() << std::endl;
       }
     }
     //assert(x.get() == 2); // doesn't work, needs analysis
+  }
+
+  {
+    // SHA256 test
+    Bus input[16];
+    Bus initstate[8];
+    
+    for(int i = 0; i < 8; i++) {
+      initstate[i].set(sha256_init_state[i]);
+    }
+    
+    Bus* hash = sha256_transform(initstate, input);
+
+    // SHA256 the null string
+    input[0].set(1 << 31);
+    for(int i = 1; i < 16; i++) {
+      input[i].set(0);
+    }
+    
+    for(int i = 0; i < 8; i++) {
+      std::cerr << std::hex << hash[i].get();
+    }
+    std::cerr << std::endl;
   }
 }
