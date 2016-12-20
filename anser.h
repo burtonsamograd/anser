@@ -11,10 +11,16 @@
 
 class Op;
 static const Op* User = (Op*)0xDEADBEEF;
+class Wire;
 class Op { 
 public:
   constexpr Op() { }
   virtual void process() { };
+
+  virtual int inputs() = 0;
+  virtual int outputs() = 0;
+  virtual Wire* input(int n) = 0;
+  virtual Wire* output(int n) = 0;
 };
 
 
@@ -97,6 +103,11 @@ public:
   void out(bool x) { return m_out->set(x); }
 
   virtual void process() = 0;
+
+  int inputs() { return 1; }
+  int outputs() { return 1; }
+  Wire* input(int n) { assert(n == 0); return m_in; }
+  Wire* output(int n) { assert(n == 0);  return m_out; }
 };
 
 class Id : public UnOp {
@@ -163,6 +174,11 @@ public:
         << "out: " << out();
     return oss.str();
   }
+
+  int inputs() { return 2; }
+  int outputs() { return 1; }
+  Wire* input(int n) { assert(n == 0 || n == 1); if(n == 0) { return m_in1; } else return m_in2; }
+  Wire* output(int n) { assert(n == 0); return m_out; }
 };
 
 class And : public BinOp {
@@ -310,6 +326,13 @@ public:
         << "carry: " << carry();
     return oss.str();
   }
+
+  int inputs() { return 2; }
+  int outputs() { return 2; }
+  Wire* input(int n) { assert(n == 0 || n == 1);
+    if(n == 0) { return m_in1; } else return m_in2; }
+  Wire* output(int n) { assert(n == 0 || n == 1);
+    if(n == 0) { return m_sum; } else return m_carry; }
 };
 
 class FullAdder : public Op {
@@ -381,6 +404,17 @@ public:
     
     return oss.str();
   }
+  int inputs() { return 2; }
+  int outputs() { return 2; }
+  Wire* input(int n) { assert(n >= 0 || n <= 2);
+    switch(n) {
+    case 0: return m_in1;
+    case 1: return m_in2;
+    case 2: return m_cin;
+    }
+  }
+  Wire* output(int n) { assert(n == 0 || n == 1);
+    if(n == 0) { return m_sum; } else return m_carry; };
 };
 
 class Bus {
