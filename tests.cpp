@@ -124,4 +124,25 @@ int main(int argc, char** argv) {
     std::cerr << std::hex << hash << std::endl;
     std::cerr << std::hex << output->get() << std::endl;
   }
+
+  {
+    Bus a, b, c;
+
+    c = a * b;
+
+    a.set(1);
+    b.set(2);
+    assert(c.get() == 2);
+
+
+    // Division
+    Bus d, e, f;
+
+    d = e * f;
+
+    d.set(10);
+    e.set(5);
+    assert(f.get() == 2);
+  }
+
 }

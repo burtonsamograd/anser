@@ -477,7 +477,6 @@ public:
     return _not(new Bus, w);
   }
   
-#if 0
   Bus* mul(Bus *o, Bus *a, Bus *b) {
     const int n = a->size();
     
@@ -492,6 +491,7 @@ public:
     return x;
   }
 
+#if 0
   Bus* x(Bus* a) {
     return _or(_and(this, a->nth(0)),_not(a->nth(0)));
   }
@@ -621,6 +621,10 @@ public:
   
   inline Bus& operator>>=(int n) { 
     return *ror(new Bus(this->size()), this, n); }
+
+  inline Bus& operator*(Bus& a) {
+    return *mul(new Bus(a.size()), &a, this);
+  }
 };
 
 #endif // __ANSER_H__
