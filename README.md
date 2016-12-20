@@ -19,6 +19,12 @@ interesting information within the function that is being analyzed.
 This libary could also be used to do digital logic design at the
 And/Or/Not gate level.
 
+NOTE
+----
+
+This library is very leaky memory wise and should be used with a
+Garbage Collector like the Bohem GC.
+
 Motivation
 ----------
 

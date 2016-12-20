@@ -108,6 +108,7 @@ int main(int argc, char** argv) {
   }
 
   {
+    // DJB2 Hash
     unsigned char* string = (unsigned char*)"0123456789012345";
 
     Bus input[16];
@@ -123,9 +124,11 @@ int main(int argc, char** argv) {
     std::cerr << "------\n";
     std::cerr << std::hex << hash << std::endl;
     std::cerr << std::hex << output->get() << std::endl;
+    assert(hash == output->get());
   }
 
   {
+    // Multiply
     Bus a, b, c;
 
     c = a * b;
