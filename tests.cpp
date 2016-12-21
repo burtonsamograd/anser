@@ -1,6 +1,32 @@
 #include "anser.h"
 #include "sha256.cpp"
 
+#if 0
+void traverse(Wire* w, std::function<void(Op*)> fop) {
+  for(int i = 0; i < w->size(); i++) {
+    Op* op = w->nth(i);
+    if(fop) fop(op);
+    
+    for(int j = 0; j < op->outputs(); j++) {
+      std::cout << op->outputs() << std::endl;
+      Wire* w2 = op->output(j);
+      traverse(w2, fop);
+    }
+  }
+}
+
+void traverse_op(Op* o) {
+  for(int i = 0; i < o->inputs(); i++) {
+    std::cout << 'o' << o << " -- " << o->input(i) << std::endl;
+    
+  }
+  for(int i = 0; i < o->outputs(); i++) {
+    std::cout << 'o' << o << " -- " << o->output(i) << std::endl;
+    
+  }
+}
+#endif
+
 unsigned long
 djb2_orig(unsigned char *str)
 {
@@ -202,23 +228,42 @@ int main(int argc, char** argv) {
   }
 
   {
-    // Square root
-    Bus x, y;
+    // And gate
+    Wire a, b, c;
+    And x(&a, &b, &c);
 
-    y = x * x;
+    assert(a.size() == 1);
+    assert(b.size() == 1);
+    assert(c.size() == 1);
 
-    y.set(4);
+    assert(a.nth(0) == &x);
+    assert(b.nth(0) == &x);
+    assert(c.nth(0) == &x);
 
-    // TODO: Perform analysis
-    for(int i = 0; i < y.size(); i++) {
-      Wire *wire = y.nth(i);
+    assert(x.input(0) == &a);
+    assert(x.input(1) == &b);
+    assert(x.output(0) == &c);
+  }
 
-      for(int j = 0; j < wire->size(); j++) {
-	Op* op = wire->nth(j);
+  {
+    ops.clear();
+    // Traverse and
+    Wire a, b, c;
+    And x(&a, &b, &c);
 
-	std::cout << op->inputs() << " " << op->outputs() << std::endl;
-      }
+    //assert(x.get() == 2); // doesn't work, needs analysis
+  }
+
+  {
+    ops.clear();
+    // Half adder
+    Wire a, b, s, c;
+    HalfAdder x(&a, &b, &s, &c);
+
+    for(auto op : ops) {
+      traverse_op(op);
     }
+	     
     //assert(x.get() == 2); // doesn't work, needs analysis
   }
 

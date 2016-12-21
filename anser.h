@@ -12,9 +12,14 @@
 class Op;
 static const Op* User = (Op*)0xDEADBEEF;
 class Wire;
+class Op;
+static std::vector<Op*> ops;
+
 class Op { 
 public:
-  constexpr Op() { }
+  Op() {
+    ops.push_back(this);
+  }
   virtual void process() { };
 
   virtual int inputs() = 0;
@@ -68,12 +73,12 @@ public:
   }
 
   Op* nth(int n) {
-    assert(n < m_value);
+    assert(n < m_ops.size());
     return m_ops[n];
   }
 
   size_t size() {
-    return m_value;
+    return m_ops.size();
   }
 };
 
@@ -177,7 +182,8 @@ public:
 
   int inputs() { return 2; }
   int outputs() { return 1; }
-  Wire* input(int n) { assert(n == 0 || n == 1); if(n == 0) { return m_in1; } else return m_in2; }
+  Wire* input(int n) { assert(n == 0 || n == 1);
+    if(n == 0) { return m_in1; } else return m_in2; }
   Wire* output(int n) { assert(n == 0); return m_out; }
 };
 
@@ -277,6 +283,11 @@ class HalfAdder : Op {
     m_sum = sum;
     m_carry = carry;
 
+    m_in1->connect(this);
+    m_in2->connect(this);
+    m_sum->connect(this);
+    m_carry->connect(this);
+
     m_d = new Wire();
     m_e = new Wire();
 
@@ -347,6 +358,12 @@ class FullAdder : public Op {
     m_cin = cin; 
     m_sum = sum; 
     m_carry = carry;
+
+    m_in1->connect(this);
+    m_in2->connect(this);
+    m_cin->connect(this);
+    m_sum->connect(this);
+    m_carry->connect(this);
 
     m_s1 = new Wire();
     m_c1 = new Wire();
