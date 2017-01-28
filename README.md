@@ -1,6 +1,8 @@
 anser - a boolean propagator network framework
 ----------------------------------------------
 
+"Operator Overloading for Fun and Profit - creating computation networks from ordinary mathematical expressions."
+
 Boolean Propagator Networks allow for the bi-directional computation
 of mathematiacal functions.  This means that you can define an
 equation and compute any of it's variables using its other variables
