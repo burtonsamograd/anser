@@ -1,4 +1,16 @@
+// sha256.cpp
+//
+// An implementation of SHA256 in anser.
+//
+// Burton Samograd
+// License: AGPL
+// 2018
+
+
 #include "anser.h"
+
+#ifndef __ANSER_SHA256_H__
+#define __ANSER_SHA256_H__
 
 static Bus& ror32(Bus& a, int n) {
   return a >>= n;
@@ -219,4 +231,14 @@ int main(int argc, char** argv) {
   }
   std::cerr << std::endl;
 }
+#else /* __MAIN__ */
+/* void test() { #DFW to remove warning
+  Bus state[8];
+  const Bus input[16];
+  sha256_transform(state, input);
+}
+*/
 #endif // __MAIN__
+
+#endif /* __ANSER_SHA256_H__ */
+ 

@@ -73,7 +73,7 @@ public:
   }
 
   Op* nth(int n) {
-    assert(n < m_ops.size());
+    assert((unsigned int)n < m_ops.size());
     return m_ops[n];
   }
 

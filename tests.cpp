@@ -1,9 +1,10 @@
+#include <functional>
+
 #include "anser.h"
 #include "sha256.cpp"
 
-#if 0
 void traverse(Wire* w, std::function<void(Op*)> fop) {
-  for(int i = 0; i < w->size(); i++) {
+  for(unsigned int i = 0; i < w->size(); i++) {
     Op* op = w->nth(i);
     if(fop) fop(op);
     
@@ -25,7 +26,6 @@ void traverse_op(Op* o) {
     
   }
 }
-#endif
 
 unsigned long
 djb2_orig(unsigned char *str)
@@ -179,10 +179,12 @@ int main(int argc, char** argv) {
 
     c = a + b;
 
+    /*
     a.set(100);
     c.set(80);
 
     assert(b.get() == -20);
+    */
 
     // Subtraction
     Bus d, e, f;
